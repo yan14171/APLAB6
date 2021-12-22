@@ -1,25 +1,14 @@
 package com.ludo.LUDOSimulator;
-
 import com.genetic.Chromosome;
-import com.neural.SemiSmartLUDOTrainer;
 import com.neural.prprNeuralLUDOPlayer;
 import com.neural.prprTDLUDOPlayer;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-/**
- * Main class the LUDO simulator - "controllers" the game. This is where you
- * Decide how many games to play and if the graphical interface should be
- * visible.
- * 
- * @author David Johan Christensen
- * 
- * @version 0.9
- */
+
 public class LUDO extends Frame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
@@ -50,7 +39,6 @@ public class LUDO extends Frame implements ActionListener {
 			}
 		});
 		setVisible(visual);
-
 	}
 
 	public int playGenetic(Chromosome c, int gameCount) {
@@ -76,8 +64,7 @@ public class LUDO extends Frame implements ActionListener {
 				board.setPlayer(p, LUDOBoard.YELLOW);
 				board.setPlayer(new SemiSmartLUDOPlayer(board), LUDOBoard.RED);
 				board.setPlayer(new SemiSmartLUDOPlayer(board), LUDOBoard.BLUE);
-				board
-						.setPlayer(new SemiSmartLUDOPlayer(board),
+				board						.setPlayer(new SemiSmartLUDOPlayer(board),
 								LUDOBoard.GREEN);
 			}
 		} catch (InterruptedException e) {
@@ -94,44 +81,6 @@ public class LUDO extends Frame implements ActionListener {
 
 	public static boolean visual = true;
 
-	private void train() {
-		System.out.println("Training Ludo");
-		SemiSmartLUDOTrainer t = new SemiSmartLUDOTrainer(board,
-				"RecordedData.xml");
-		board.setPlayer(t, LUDOBoard.YELLOW);
-		board.setPlayer(new SemiSmartLUDOPlayer(board), LUDOBoard.RED);
-		board.setPlayer(new SemiSmartLUDOPlayer(board), LUDOBoard.BLUE);
-		board.setPlayer(new SemiSmartLUDOPlayer(board), LUDOBoard.GREEN);
-
-		// Record Data here for training
-		try {
-			for (int i = 0; i < 1000; i++) {
-				board.play();
-				board.kill();
-
-				board.reset();
-				t.reset(board);
-				board.setPlayer(t, LUDOBoard.YELLOW);
-				board.setPlayer(new SemiSmartLUDOPlayer(board), LUDOBoard.RED);
-				board.setPlayer(new SemiSmartLUDOPlayer(board), LUDOBoard.BLUE);
-				board
-						.setPlayer(new SemiSmartLUDOPlayer(board),
-								LUDOBoard.GREEN);
-				if ((i % 50) == 0)
-					System.out.print(".");
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		t.endRecording();
-		System.out.println("Training is finished!");
-	}
-
-	/**
-	 * Plays a number of games, which are useful when all players are automatic.
-	 * Remember to set the "visual" field to speed up the simulation time.
-	 * 
-	 */
 	public void play() {
 		System.out.println("Playing Ludo");
 		long time = System.currentTimeMillis();

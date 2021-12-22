@@ -2,9 +2,6 @@ package com.genetic;
 
 public class GAExperimentManager {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 
 		int[] config = { 7, 7, 1 };
@@ -15,14 +12,6 @@ public class GAExperimentManager {
 		for (int i = 0; i < 500; i++) {
 			try {
 				p.RunEpoch();
-				/*
-				 * System.out.println("Maximum fitness in population: " +
-				 * p.getBestFitness());
-				 */
-				/*
-				 * System.out.print(p.getBestFitness()+"\t"); if(i%10==0&&i!=0)
-				 * System.out.println();
-				 */
 				System.out.println("Epoch # " + i + ": Score = "
 						+ p.getBestFitness());
 				if (p.getBestFitness() < min) {
